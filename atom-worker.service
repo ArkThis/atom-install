@@ -1,0 +1,21 @@
+[Unit]
+Description=AtoM worker
+After=network.target
+# High interval and low restart limit to increase the possibility
+# of hitting the rate limits in long running recurrent jobs.
+StartLimitIntervalSec=24h
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/usr/share/nginx/atom-edit
+ExecStart=/usr/bin/php8.3 -d memory_limit=-1 -d error_reporting="E_ALL" symfony jobs:worker
+KillSignal=SIGTERM
+Restart=on-failure
+RestartSec=30
+

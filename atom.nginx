@@ -1,0 +1,60 @@
+upstream atom {
+	server unix:/run/php-fpm.atom.sock;
+}
+
+server {
+
+	listen 80;
+	root /usr/share/nginx/atom;
+
+	# http://wiki.nginx.org/HttpCoreModule#server_name
+	# _ means catch any, but it's better if you replace this with your server
+	# name, e.g. archives.foobar.com
+	server_name _;
+
+	client_max_body_size 72M;
+
+	location ~* ^/(css|dist|js|images|plugins|vendor)/.*\.(css|png|jpg|js|svg|ico|gif|pdf|woff|woff2|otf|ttf)$ {
+
+	}
+
+	location ~* ^/(downloads)/.*\.(pdf|xml|html|csv|zip|rtf)$ {
+
+	}
+
+	location ~ ^/(ead.dtd|favicon.ico|robots.txt|sitemap.*)$ {
+
+	}
+
+	location / {
+		try_files $uri /index.php?$args;
+		if (-f $request_filename) {
+			return 403;
+		}
+	}
+
+	location ~* /uploads/r/(.*)/conf/ {
+
+	}
+
+	location ~* ^/uploads/r/(.*)$ {
+		include /etc/nginx/fastcgi_params;
+		set $index /index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$index;
+		fastcgi_param SCRIPT_NAME $index;
+		fastcgi_pass atom;
+	}
+
+	location ~ ^/private/(.*)$ {
+		internal;
+		alias /usr/share/nginx/atom/$1;
+	}
+
+	location ~ ^/(index|qubit_dev)\.php(/|$) {
+		include /etc/nginx/fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_split_path_info ^(.+\.php)(/.*)$;
+		fastcgi_pass atom;
+	}
+
+}
