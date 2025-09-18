@@ -13,7 +13,7 @@ WantedBy=multi-user.target
 Type=simple
 User=www-data
 Group=www-data
-WorkingDirectory=/usr/share/nginx/atom-edit
+WorkingDirectory=/usr/share/nginx/atom
 ExecStart=/usr/bin/php8.3 -d memory_limit=-1 -d error_reporting="E_ALL" symfony jobs:worker
 KillSignal=SIGTERM
 Restart=on-failure
