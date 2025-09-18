@@ -1,11 +1,12 @@
 #!/bin/bash
 
 source config.sh
-SITE_NAME="$1"
 
-if [ -z "$SITE_NAME" ]; then
-    echo "ERROR: no site name given (eg atom.example.com)"
-    exit 1
+if [ -z "$1" ]; then
+    echo "No site name given (eg atom.example.com)"
+    echo "Using default: $SITE_NAME"
+else
+    SITE_NAME="$1"
 fi
 
 # This must be run for each atom site individually, as the server_name / DNS /
