@@ -1,7 +1,12 @@
 #!/bin/bash
 
 source config.sh
-SITE_NAME="atom-edit.example.com"
+SITE_NAME="$1"
+
+if [ -z "$SITE_NAME" ]; then
+    echo "ERROR: no site name given (eg atom.example.com)"
+    exit 1
+fi
 
 # This must be run for each atom site individually, as the server_name / DNS /
 # URL will differ.
@@ -12,7 +17,7 @@ log "Enabling SSL certificate..."
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
 
 $APT install certbot python3-certbot-nginx
-grep "server_name" $ATOM_CONF
+grep -Hn "server_name" $ATOM_NGINX
 
 echo ""
 echo "Please set 'server_name' in that config file to match the site-name"

@@ -3,59 +3,41 @@
 
 source config.sh
 
-eval $PAUSE
-
+log "Download and install the public signing key used in the ElasticSearch repository..."
 # --------------------------
-echo ""
-echo "Download and install the public signing key used in the ElasticSearch repository..."
-echo ""
-# --------------------------
-
 ES_KEYRING="/usr/share/keyrings/elasticsearch-keyring.gpg"
 # Only fetch the keyring if it ain't exist already:
 if [ ! -s "$ES_KEYRING" ]; then
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o $ES_KEYRING
-    eval $PAUSE
+    pause
 fi
 
 ES_APT_LIST=/etc/apt/sources.list.d/elastic-6.x.list
 if [ ! -s "$ES_APT_LIST" ]; then
     echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/oss-6.x/apt stable main" | sudo tee -a $ES_APT_LIST
-    eval $PAUSE
+    pause
 fi
 
 
-# --------------------------
-echo ""
-echo "Install required packages..."
-echo ""
+log "Install required packages..."
 # --------------------------
 $APT update
 $APT install --no-install-recommends $PACKAGES
 
 # This must be done /AFTER/ installing Java:
 $APT install $PKG_ELASTISEARCH
+pause
 
-eval $PAUSE
 
-
-# --------------------------
-echo ""
-echo "Enabling ElasticSearch..."
-echo ""
+log "Enabling ElasticSearch..."
 # --------------------------
 sudo systemctl enable elasticsearch
 sudo systemctl start elasticsearch
+pause
 
-eval $PAUSE
 
-
+log "Install from tarball"
 # --------------------
-echo ""
-echo "Install from tarball"
-echo ""
-# --------------------
-
 # Clean and create website folder:
 sudo rm -rf $DIR_ATOM_SITE
 sudo mkdir $DIR_ATOM_SITE
@@ -66,27 +48,32 @@ if [ ! -s "$ATOM_TAR" ]; then
     wget https://storage.accesstomemory.org/releases/$ATOM_TAR
 fi
 
-eval $PAUSE
+pause
 
-echo "Unpacking AtoM to '$DIR_ATOM_SITE'..."
+
+log "Unpacking AtoM to '$DIR_ATOM_SITE'..."
+# --------------------
 sudo -u $WEBSITE_USER tar -xzvf $ATOM_TAR -C $DIR_ATOM_SITE --strip 1
 
-eval $PAUSE
-
-# Setup the database:
-./setup-atom-db.sh
+log "Finished unpacking to '$DIR_ATOM_SITE'..."
+pause
 
 
-# --------------------
-echo ""
-echo "Installing AtoM worker..."
-echo ""
+log "Installing AtoM worker..."
 # --------------------
 sudo cp -av ./$ATOM_WORKER /usr/lib/systemd/system/$ATOM_WORKER
 sudo systemctl daemon-reload
 sudo systemctl enable atom-worker
 sudo systemctl start atom-worker
 
-echo $PAUSE
+pause
+
+
+log "Calling next steps..."
+# --------------------
+./setup-atom-db.sh
+pause
 ./setup-atom-site.sh
+pause
+./setup-atom-ssl.sh "$SITE_NAME"
 

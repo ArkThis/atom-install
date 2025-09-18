@@ -3,10 +3,12 @@
 # These are settings for the install of AtoM
 # ==============================================
 
-THIS_ATOM="atom"            # Allows the string "atom" to be replaced "wherever easily possible".
-                            # USE WITH CAUTION! Will fail with existing default config, because
-                            # you do still need manual replacements where "atom" is the default
-                            # value.
+THIS_ATOM="atom-edit"       # Allows the string "atom" to be replaced where it
+                            # makes sense to distinguish between instances.
+
+SITE_NAME="$THIS_ATOM.example.com"  # The FQDN of the Atom website to setup
+
+ATOM="atom"
 ATOM_DB="atom"
 ATOM_DB_USER="atom"
 ATOM_DB_PW="aTOmPASSword25"
@@ -18,7 +20,7 @@ APT="sudo apt"
 WEBSITE_USER="www-data"
 
 DIR_NGINX_SITES="/usr/share/nginx"
-DIR_ATOM_SITE="$DIR_NGINX_SITES/$THIS_ATOM"
+DIR_ATOM_SITE="$DIR_NGINX_SITES/$ATOM"
 
 
 # ---------------------------------------
@@ -45,7 +47,7 @@ PACKAGES="$PKG_SERVER $PKG_OTHER $PKG_PHP $PKG_ES $PKG_GEARMAN"
 # --------------------------
 
 ATOM_NGINX="/etc/nginx/sites-available/$THIS_ATOM"
-ATOM_CONF="$THIS_ATOM.nginx"
+ATOM_CONF="atom.nginx"
 
 ATOM_PHPFPM="/etc/php/8.3/fpm/pool.d/atom.conf"
 PHPFPM="php8.3-fpm"     # Yes, they're scrabmled, but quite-similar...
