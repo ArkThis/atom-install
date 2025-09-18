@@ -6,7 +6,7 @@
 THIS_ATOM="atom-edit"       # Allows the string "atom" to be replaced where it
                             # makes sense to distinguish between instances.
 
-SITE_NAME="$THIS_ATOM.example.com"  # The FQDN of the Atom website to setup
+SITE_NAME="$THIS_ATOM.allhau.av-rd.com"  # The FQDN of the Atom website to setup
 
 ATOM="atom"
 ATOM_DB="atom"
@@ -33,7 +33,7 @@ PKG_OTHER2="fop libsaxon-java"
 PKG_MEDIA="imagemagick ghostscript poppler-utils ffmpeg"
 PKG_GEARMAN="gearman-job-server"
 PKG_ELASTISEARCH="elasticsearch-oss"
-PKG_MEMCACHE="php-memcache"
+PKG_MEMCACHE="php-memcache memcached"
 PKG_PHPFPM="php-fpm"
 PKG_PHP="$PKG_PHPFPM $PKG_MEMCACHE php-common php8.3-common php8.3-cli php8.3-curl php-json php8.3-ldap php8.3-mysql php8.3-opcache php8.3-readline php8.3-xml php8.3-mbstring php8.3-xsl php8.3-zip php-apcu"
 
