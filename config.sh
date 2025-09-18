@@ -46,10 +46,10 @@ PACKAGES="$PKG_SERVER $PKG_OTHER $PKG_PHP $PKG_ES $PKG_GEARMAN"
 # For website configuration
 # --------------------------
 
-ATOM_NGINX="/etc/nginx/sites-available/$THIS_ATOM"
-ATOM_CONF="atom.nginx"
+ATOM_NGINX="/etc/nginx/sites-available/$ATOM"
+ATOM_CONF="$ATOM.nginx"
 
-ATOM_PHPFPM="/etc/php/8.3/fpm/pool.d/atom.conf"
+ATOM_PHPFPM="/etc/php/8.3/fpm/pool.d/$ATOM.conf"
 PHPFPM="php8.3-fpm"     # Yes, they're scrabmled, but quite-similar...
 PHPFPM_CMD="php-fpm8.3" # Yes, they're scrambled, but quite-similar...
 
