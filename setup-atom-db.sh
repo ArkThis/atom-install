@@ -4,29 +4,19 @@
 # According to documentation:
 # https://www.accesstomemory.org/en/docs/2.9/admin-manual/installation/ubuntu/#installation-ubuntu
 
-THIS_ATOM="atom"
-ATOM_USER="atom"
-ATOM_PW="aTOmPASSword25"
-
+source config.sh
 
 # --------------------
 echo ""
-echo "Setting up database '$THIS_ATOM' for user '$ATOM_USER'..."
+echo "Setting up database '$ATOM_DB' for user '$ATOM_DB_USER'..."
 echo ""
 # --------------------
 
-function run
-{
-    CMD="$1"
-    echo "$CMD"
-    eval "$CMD"
-}
-
-CMD="sudo mysql -h localhost -u root -e \"CREATE DATABASE $THIS_ATOM CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;\""
+CMD="sudo mysql -h localhost -u root -e \"CREATE DATABASE $ATOM_DB CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;\""
 run "$CMD"
 
-CMD="sudo mysql -h localhost -u root -e \"CREATE USER '$ATOM_USER'@'localhost' IDENTIFIED BY '$ATOM_PW';\""
+CMD="sudo mysql -h localhost -u root -e \"CREATE USER '$ATOM_DB_USER'@'localhost' IDENTIFIED BY '$ATOM_PW';\""
 run "$CMD"
 
-CMD="sudo mysql -h localhost -u root -e \"GRANT ALL PRIVILEGES ON $THIS_ATOM.* TO '$ATOM_USER'@'localhost';\""
+CMD="sudo mysql -h localhost -u root -e \"GRANT ALL PRIVILEGES ON $ATOM_DB.* TO '$ATOM_DB_USER'@'localhost';\""
 run "$CMD"

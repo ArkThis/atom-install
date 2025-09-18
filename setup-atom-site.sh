@@ -1,33 +1,43 @@
 #!/bin/bash
 
-THIS_ATOM="atom"
+source config.sh
 
-ATOM_NGINX="/etc/nginx/sites-available/$THIS_ATOM"
-ATOM_CONF="$THIS_ATOM.nginx"
-
-DIR_NGINX_SITES="/usr/share/nginx"
-DIR_ATOM_SITE="$DIR_NGINX_SITES/$THIS_ATOM"
-WEBSITE_USER="www-data"
-
+log "Finish AtoM installation (PHP symfony in $DIR_ATOM_SITE)..."
+# ---------------------------------------
 cd $DIR_ATOM_SITE
 sudo -u $WEBSITE_USER php symfony tools:install
+pause
 
+
+log "Copy and enable atom-nginx site configuration..."
+# ---------------------------------------
 sudo cp $ATOM_CONF $ATOM_NGINX
 sudo ln -sf $ATOM_NGINX /etc/nginx/sites-enabled/$THIS_ATOM
 sudo rm /etc/nginx/sites-enabled/default
+sudo nginx -t
+pause
 
-# Start PHP-FPM
 
-PHPFPM="php8.3-fpm"     # Yes, they're scrabmled, but quite-similar...
-PHPFPM_CMD="php-fpm8.3" # Yes, they're scrambled, but quite-similar...
+log "Installing PHP FPM config..."
+# ---------------------------------------
+sudo cp -av $(basename $ATOM_PHPFPM) $ATOM_PHPFPM
+pause
+
+log "Start PHP-FPM..."
+# ---------------------------------------
 sudo systemctl enable $PHPFPM
 sudo systemctl start $PHPFPM
 sudo $PHPFPM_CMD --test
 
 sudo rm /etc/php/8.3/fpm/pool.d/www.conf
 sudo systemctl restart $PHPFPM
+pause
 
-# Restart webservice:
+
+log "Restart webservice..."
+# ---------------------------------------
 sudo systemctl enable nginx
 sudo systemctl reload nginx
+pause
+
 
