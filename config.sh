@@ -21,6 +21,7 @@ ATOM_TAR="atom-latest.tar.gz"
 ATOM_WORKER="atom-worker.service"
 
 APT="sudo apt"
+MYSQL="sudo mysql -h localhost -u root"     # command to run mysql commands
 WEBSITE_USER="www-data"
 
 DIR_NGINX_SITES="/usr/share/nginx"
