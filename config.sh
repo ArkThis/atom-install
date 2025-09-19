@@ -61,6 +61,16 @@ ATOM_PHPFPM="/etc/php/$PHP_VERSION/fpm/pool.d/$ATOM.conf"
 PHPFPM="php$PHP_VERSION-fpm"     # Yes, they're scrabmled, but quite-similar...
 PHPFPM_CMD="php-fpm$PHP_VERSION" # Yes, they're scrambled, but quite-similar...
 
+# --------------------------
+# For AtoM upgrade (to newer version)
+# --------------------------
+ATOM_OLD="$HOME/install/atom"
+ATOM_NEW="$DIR_ATOM_SITE"
+ATOM_OLD_SQL="$HOME/install/atom-db_backup.sql.bz2"
+ATOM_NEW_SYNC_FOLDERS="uploads downloads"
+
+MYSQLDUMP="sudo mysqldump"
+
 
 # --------------------------
 # General functions
