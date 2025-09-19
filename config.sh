@@ -26,7 +26,7 @@ APT="sudo apt"
 # Useful (=required) if you change "-u root" to "-u $ATOM_DB_USER":
 MYSQL="sudo mysql -h localhost -u root"     # command to run mysql commands
 WEBSITE_USER="www-data"
-BECOME_WEB="# sudo -u $WEBSITE_USER"
+BECOME_WEB="sudo -u $WEBSITE_USER"
 
 DIR_NGINX_SITES="/usr/share/nginx"
 DIR_ATOM_SITE="$DIR_NGINX_SITES/$ATOM"
