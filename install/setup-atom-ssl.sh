@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source config.sh
+source ../config.sh
 
 if [ -z "$1" ]; then
     echo "No site name given (eg atom.example.com)"

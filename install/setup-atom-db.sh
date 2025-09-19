@@ -4,7 +4,7 @@
 # According to documentation:
 # https://www.accesstomemory.org/en/docs/2.9/admin-manual/installation/ubuntu/#installation-ubuntu
 
-source config.sh
+source ../config.sh
 
 log "Setting up database '$ATOM_DB' for user '$ATOM_DB_USER'..."
 # --------------------

@@ -1,7 +1,7 @@
 #!/bin/bash
 #@date: 2025-09-17
 
-source config.sh
+source ../config.sh
 
 log "Download and install the public signing key used in the ElasticSearch repository..."
 # --------------------------
