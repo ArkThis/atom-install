@@ -8,8 +8,10 @@
 #Takes care of refreshing the search and browse indexes and services:
 
 MYDIR=$(dirname "$0")            # path of this script. Must be here, to find config.
+echo "$MYDIR"
 source "$MYDIR/../config.sh"     # Load variables/functions
 
+pause
 PWD=$(pwd)
 cd $DIR_ATOM_SITE                # The "BECOME_WEB" calls must be run in atom's website folder.
 
@@ -36,7 +38,7 @@ log "Restarting services: $SERVICES..."
 # --------------------------
 
 for SERVICE in $SERVICES; do
-    continue # Enable to DEBUG lower parts of the script.
+    #continue # Enable to DEBUG lower parts of the script.
 
     sudo systemctl restart $SERVICE
     sudo systemctl status $SERVICE
