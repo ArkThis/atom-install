@@ -23,7 +23,7 @@ pause
 
 log "Rebuilding search index and clear cache..."
 # --------------------------
-$BECOME_WEB php -d memory_limit=-1 symfony search:populate
+$BECOME_WEB php -d memory_limit=-1 symfony search:populate $SEARCH_UPDATE
 pause
 
 log "Clearing possible outdated cache..."

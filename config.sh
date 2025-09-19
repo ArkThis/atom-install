@@ -4,7 +4,7 @@
 # ==============================================
 
 MYSELF="$0"                 # Useful to relate to paths relative to this config file.
-THIS_ATOM="atom"            # Allows the string "atom" to be replaced where it
+THIS_ATOM="atom-ro"         # Allows the string "atom" to be replaced where it
                             # makes sense to distinguish between instances.
 
 SITE_NAME="$THIS_ATOM.allhau.av-rd.com"  # The FQDN of the Atom website to setup
@@ -74,6 +74,7 @@ ATOM_OLD_SQL="$HOME/install/atom-db_backup.sql.bz2"
 ATOM_NEW_SYNC_FOLDERS="uploads downloads"
 
 MYSQLDUMP="sudo mysqldump"
+SEARCH_UPDATE="--update"
 
 
 # --------------------------
