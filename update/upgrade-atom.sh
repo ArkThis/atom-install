@@ -4,8 +4,8 @@
 #Instructions based on:
 #https://www.accesstomemory.org/en/docs/2.9/admin-manual/installation/upgrading/
 
-MYDIR=$(dirname "$0")            # path of this script
 RSYNC="sudo rsync -avP --delete"
+MYDIR=$(dirname "$0")            # path of this script. Must be here, to find config.
 source "$MYDIR/../config.sh"     # Load variables/functions
 
 
