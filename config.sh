@@ -3,6 +3,7 @@
 # These are settings for the install of AtoM
 # ==============================================
 
+MYSELF="$0"                 # Useful to relate to paths relative to this config file.
 THIS_ATOM="atom-edit"       # Allows the string "atom" to be replaced where it
                             # makes sense to distinguish between instances.
 
@@ -58,8 +59,8 @@ ATOM_NGINX="/etc/nginx/sites-available/$ATOM"
 ATOM_CONF="$ATOM.nginx"
 
 ATOM_PHPFPM="/etc/php/$PHP_VERSION/fpm/pool.d/$ATOM.conf"
-PHPFPM="php$PHP_VERSION-fpm"     # Yes, they're scrabmled, but quite-similar...
-PHPFPM_CMD="php-fpm$PHP_VERSION" # Yes, they're scrambled, but quite-similar...
+PHPFPM="php$PHP_VERSION-fpm"     # Yes, they're scrabmled, but quite-similar... (service)
+PHPFPM_CMD="php-fpm$PHP_VERSION" # Yes, they're scrambled, but quite-similar... (command)
 
 # --------------------------
 # For AtoM upgrade (to newer version)
@@ -99,3 +100,4 @@ function run
     eval "$CMD"
 }
 
+echo "Loaded config: $MYSELF"
